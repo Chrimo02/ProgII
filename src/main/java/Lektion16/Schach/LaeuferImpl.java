@@ -10,6 +10,8 @@ public class LaeuferImpl extends AbstractFigur implements Laeufer
   public Brett gibErlaubteFelder()
   {
     Brett brett = new Brett();
+    brett.markiereFeld(x,y); //Aktuelle Position der Figur markieren
+
     //Diagonale nach oben rechts
     for (int i = 1; i <= 8; i++) {
       int newX = x + i;

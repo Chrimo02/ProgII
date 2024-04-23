@@ -24,4 +24,6 @@ public class UnternehmenTest {
         assertEquals(1.1,a1.gehaltsfaktor);
     }
 
+    //Besser wäre es noch, wenn mehrfache Beförderung getestet wird
+
 }
