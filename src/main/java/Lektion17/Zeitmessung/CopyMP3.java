@@ -11,20 +11,23 @@ public class CopyMP3 {
             long[] unbufferedTimes = new long[10];
             long[] bufferedTimes = new long[10];
             long[] byteArrayTimes = new long[10];
+
             for (int i = 0;i<10;i++){
                 unbufferedTimes[i] = copyUnbuffered(dateipfad);
                 bufferedTimes[i] = copyBuffered(dateipfad);
                 byteArrayTimes[i] = copyWithByteArray(dateipfad);
             }
+
             double avgUnbuffered = avg(unbufferedTimes);
             double avgBuffered = avg(bufferedTimes);
             double avgByteArray = avg(byteArrayTimes);
+
             System.out.println("Durchschnittsdauer Unbuffered: " + avgUnbuffered/1000000 +" Millisekunden.");
             System.out.println("Durchschnittsdauer Buffered: " + avgBuffered/1000000 + " Millisekunden");
             System.out.println("Durchschnittsdauer ByteArray: " +  avgByteArray/1000000 + " Millisekunden");
             System.out.println();
-            System.out.println("Der Unbuffered-Kopiervorgang dauert circa " + (int) (avgUnbuffered/avgBuffered) + " mal so lange wie der Buffered-Kopiervorgang");
-            System.out.println("Der Unbuffered-Kopiervorgang dauert circa " + (int) (avgUnbuffered/avgByteArray) + " mal so lange wie der ByteArray-Kopiervorgang");
+            System.out.println("Der Unbuffered-Kopiervorgang dauert ca. " + (int) (avgUnbuffered/avgBuffered) + " mal so lange wie der Buffered-Kopiervorgang");
+            System.out.println("Der Unbuffered-Kopiervorgang dauert ca. " + (int) (avgUnbuffered/avgByteArray) + " mal so lange wie der ByteArray-Kopiervorgang");
 
         }
         catch (IOException e){
@@ -52,7 +55,7 @@ public class CopyMP3 {
     public static long copyUnbuffered(String path) throws IOException{
         long startTimeBuffered = System.nanoTime();
         try(InputStream fis = new FileInputStream(path);
-            OutputStream fos = new FileOutputStream("/Users/christian/IdeaProjects/Maven/mp3s/unbuffered_copy.mp3"))
+            OutputStream fos = new FileOutputStream("/Users/christian/IdeaProjects/ProgII/mp3s/unbuffered_copy.mp3"))
         {
             copy(fis,fos);
         }
@@ -64,7 +67,7 @@ public class CopyMP3 {
         long startTimeBuffered = System.nanoTime();
         try(InputStream fis = new FileInputStream(path);
             BufferedInputStream bis = new BufferedInputStream(fis);
-            OutputStream fos = new FileOutputStream("/Users/christian/IdeaProjects/Maven/mp3s/buffered_copy.mp3");
+            OutputStream fos = new FileOutputStream("/Users/christian/IdeaProjects/ProgII/mp3s/buffered_copy.mp3");
             BufferedOutputStream bos = new BufferedOutputStream(fos))
         {
             copy(bis,bos);
@@ -75,7 +78,7 @@ public class CopyMP3 {
     public static long copyWithByteArray(String path) throws IOException{
         long startTimeBuffered = System.nanoTime();
         try(InputStream fis = new FileInputStream(path);
-            OutputStream fos = new FileOutputStream("/Users/christian/IdeaProjects/Maven/mp3s/byteArray_copy.mp3"))
+            OutputStream fos = new FileOutputStream("/Users/christian/IdeaProjects/ProgII/mp3s/byteArray_copy.mp3"))
         {
             byte[] array = new byte[1024];
             int b;
