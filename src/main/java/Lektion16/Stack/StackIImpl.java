@@ -13,12 +13,8 @@ public class StackIImpl implements StackI {
         stack.add(e);
     }
     @Override
-    public Object pop(){
-        if (this.stack.isEmpty()) throw new RuntimeException("Der Stack ist bereits leer!");
-        Object popped = stack.getLast();
-        stack.remove(stack.size()-1);
-        stack.trimToSize();
-        return popped;
+    public Object pop() {
+        return stack.remove(stack.size() - 1);
     }
 
 

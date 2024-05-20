@@ -18,9 +18,9 @@ public class Main {
 
         try(
             BufferedReader reader = new BufferedReader( new FileReader(dateiname));
-            BufferedWriter winfWriter = new BufferedWriter((new FileWriter("Winf-nummern.txt")));
-            BufferedWriter infWriter = new BufferedWriter((new FileWriter("inf-nummern.txt")));
-            BufferedWriter ecWriter = new BufferedWriter((new FileWriter("ecf-nummern.txt")))) {
+            BufferedWriter winfWriter = new BufferedWriter((new FileWriter("/Users/christian/IdeaProjects/ProgII/src/main/resources/Winf-nummern.txt")));
+            BufferedWriter infWriter = new BufferedWriter((new FileWriter("/Users/christian/IdeaProjects/ProgII/src/main/resources/inf-nummern.txt")));
+            BufferedWriter ecWriter = new BufferedWriter((new FileWriter("/Users/christian/IdeaProjects/ProgII/src/main/resources/ecf-nummern.txt")))) {
             String matrikelnummer;
             while ((matrikelnummer = reader.readLine()) != null){
                 if (validMatNr( matrikelnummer)){

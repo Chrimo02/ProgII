@@ -15,7 +15,7 @@ public class WertebereicheTest {
 
     @Test
     public void testByteNull(){
-        try (FileOutputStream fos = new FileOutputStream("testfile.txt")) {
+        try (FileOutputStream fos = new FileOutputStream("/Users/christian/IdeaProjects/ProgII/src/main/resources/testfile.txt")) {
             assertThrows(NullPointerException.class, () -> fos.write(null, 0, 0));
         }
         catch (IOException e) {
@@ -24,7 +24,7 @@ public class WertebereicheTest {
     }
     @Test
     public void testNegativeOffset(){
-        try (FileOutputStream fos = new FileOutputStream("testfile.txt")) {
+        try (FileOutputStream fos = new FileOutputStream("/Users/christian/IdeaProjects/ProgII/src/main/resources/testfile.txt")) {
             byte[] data = new byte[4];
             assertThrows(IndexOutOfBoundsException.class, () -> fos.write(data, -1, 0));
         }
@@ -34,7 +34,7 @@ public class WertebereicheTest {
     }
     @Test
     public void testBiggerOffset(){
-        try (FileOutputStream fos = new FileOutputStream("testfile.txt")) {
+        try (FileOutputStream fos = new FileOutputStream("/Users/christian/IdeaProjects/ProgII/src/main/resources/testfile.txt")) {
             byte[] data = new byte[4];
             assertThrows(IndexOutOfBoundsException.class, () -> fos.write(data, 5, 0));
         }
@@ -44,7 +44,7 @@ public class WertebereicheTest {
     }
     @Test
     public void testNegativeLength(){
-        try (FileOutputStream fos = new FileOutputStream("testfile.txt")) {
+        try (FileOutputStream fos = new FileOutputStream("/Users/christian/IdeaProjects/ProgII/src/main/resources/testfile.txt")) {
             byte[] data = new byte[4];
             assertThrows(IndexOutOfBoundsException.class, () -> fos.write(data, 0, -1));
         }
@@ -55,7 +55,7 @@ public class WertebereicheTest {
     @Test
     public void testBiggerLength(){
 
-        try (FileOutputStream fos = new FileOutputStream("testfile.txt")) {
+        try (FileOutputStream fos = new FileOutputStream("/Users/christian/IdeaProjects/ProgII/src/main/resources/testfile.txt")) {
             byte[] data = new byte[4];
             assertThrows(IndexOutOfBoundsException.class, () -> fos.write(data, 0,5));
         }
@@ -66,7 +66,7 @@ public class WertebereicheTest {
     @Test
     public void testOffLenSumToBig(){
 
-        try (FileOutputStream fos = new FileOutputStream("testfile.txt")) {
+        try (FileOutputStream fos = new FileOutputStream("/Users/christian/IdeaProjects/ProgII/src/main/resources/testfile.txt")) {
             byte[] data = new byte[4];
             assertThrows(IndexOutOfBoundsException.class, () -> fos.write(data,2,3));
         } catch (IOException e) {

@@ -7,8 +7,8 @@ public class Main {
     public static void main(String[] args) {
         byte[] test = "Hallo Welt".getBytes();
         System.out.println(test.length);
-        try(FileOutputStream fos1 = new FileOutputStream("file1.txt");
-            FileOutputStream fos2 = new FileOutputStream("file2.txt"))
+        try(FileOutputStream fos1 = new FileOutputStream("/Users/christian/IdeaProjects/ProgII/src/main/resources/file1.txt");
+            FileOutputStream fos2 = new FileOutputStream("/Users/christian/IdeaProjects/ProgII/src/main/resources/file2.txt"))
         {
             OutputStreamDoubler osd = new OutputStreamDoubler(fos1,fos2);
             osd.write(test);

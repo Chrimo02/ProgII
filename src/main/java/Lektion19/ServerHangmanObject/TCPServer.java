@@ -1,10 +1,8 @@
-package Lektion18.ServerHangman;
+package Lektion19.ServerHangmanObject;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.nio.Buffer;
-import java.util.Scanner;
 
 public class TCPServer {
     public static void main(String[] args) {
@@ -15,23 +13,11 @@ public class TCPServer {
                 try (
                         Socket connection = ss.accept();
                         InputStream is = connection.getInputStream();
-                        BufferedReader br = new BufferedReader(new InputStreamReader(is));
-                        OutputStream os = connection.getOutputStream())
+                        ObjectInputStream ois = new ObjectInputStream(is);
+                        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("clientMessage.dat")))
                 {
-                       while (true){
-                           String clientMessage = br.readLine();
-                           System.out.println("Nachricht vom Client: " + clientMessage);
-                           if (clientMessage.equals("Ich will Hangman spielen")) {
-                               //hangman(chooseGame(),os,br);
-                               Hangman hangman = new Hangman();
-                               hangman.playHangman(Hangman.chooseGame(),os,br);
-                           }
-                           else {
-                               os.write("OK\n".getBytes());
-                               os.flush();
-                           }
 
-                       }
+
                 }
                 catch (IOException e){
                     e.printStackTrace();
@@ -43,9 +29,7 @@ public class TCPServer {
         }
     }
 
-    //Galgenmännchen-Klasse erstellen, Server soll keine hangman-methode haben, sondern eine Instanz von Galgenmännchen benutzen
-    /*
-    public static void hangman(String loesung, OutputStream os, BufferedReader br) throws IOException
+    public static void hangman(String loesung, ObjectOutputStream oos, ObjectInputStream ois) throws IOException
     {
         char[] richtigesWort = loesung.toCharArray();
         char[] loesungswort = new char[loesung.length()];
@@ -56,14 +40,14 @@ public class TCPServer {
 
         int counter = 1;
         boolean stimmtUeberein = false;
-        os.write("Bitte geben Sie ihren ersten Buchstabentipp ein: ".getBytes());
-        os.flush();
+        oos.write("Bitte geben Sie ihren ersten Buchstabentipp ein: ".getBytes());
+        oos.flush();
         while (!stimmtUeberein && counter <= 15)
         {
-            os.write((counter + ". Versuch: " + String.valueOf(loesungswort) + "\n").getBytes());
-            os.flush();
+            oos.write((counter + ". Versuch: " + String.valueOf(loesungswort) + "\n").getBytes());
+            oos.flush();
 
-            char versuch = br.readLine().charAt(0);
+            char versuch = ois.readChar();
             for (int k = 0; k < loesungswort.length; k++)
             {
                 if (richtigesWort[k] == versuch || richtigesWort[k] == versuch-32 || richtigesWort[k] == versuch+32) {
@@ -72,20 +56,20 @@ public class TCPServer {
 
             }
             if (String.valueOf(loesungswort).equalsIgnoreCase(String.valueOf(richtigesWort))){
-                os.write(("Sie haben das Wort erraten: " + String.valueOf(loesungswort).toUpperCase() + "\n").getBytes());
-                os.flush();
+                oos.write(("Sie haben das Wort erraten: " + String.valueOf(loesungswort).toUpperCase() + "\n").getBytes());
+                oos.flush();
                 stimmtUeberein = true;
             }
             else{
                 counter++;
-                os.write("Bitte geben Sie ihren nächsten Tipp ein: ".getBytes());
-                os.flush();
+                oos.write("Bitte geben Sie ihren nächsten Tipp ein: ".getBytes());
+                oos.flush();
             }
 
         }
         if (counter == 16){
-            os.write("Sie haben keine Versuche mehr übrig\n".getBytes());
-            os.flush();
+            oos.write("Sie haben keine Versuche mehr übrig\n".getBytes());
+            oos.flush();
         }
     }
     public static String chooseGame(){
@@ -95,6 +79,4 @@ public class TCPServer {
         int random = (int) (Math.random()*wortspeicher.length);
         return wortspeicher[random];
     }
-
-     */
 }
