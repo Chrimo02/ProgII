@@ -1,38 +1,32 @@
 package Lektion19.ServerHangmanObject;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.Scanner;
-public class TCPClient {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        final int PORT = 50001;
-        final String HOST = "localhost";
 
+public class TCPClient {
+    private final static int PORT = 50005;
+    private final static String HOST = "localhost";
+
+    public static void main(String[] args){
         try (Socket connectionToServer = new Socket(HOST,PORT);
-             OutputStream os = connectionToServer.getOutputStream();
-             InputStream is = connectionToServer.getInputStream();
-             BufferedReader br = new BufferedReader(new InputStreamReader(is)))
+             ObjectOutputStream oos = new ObjectOutputStream(connectionToServer.getOutputStream());
+             ObjectInputStream ois = new ObjectInputStream(connectionToServer.getInputStream()))
         {
-            String serverMessage;
-            while (true){
-                    String messageToServer = scanner.nextLine();
-                    os.write((messageToServer + "\n").getBytes());
-                    os.flush();
-                    serverMessage = br.readLine();
-                    System.out.println("Nachricht vom Server: " + serverMessage);
-            }
+            boolean finished = false;
+            do {
+                AntwortObjekt antwort = (AntwortObjekt) ois.readObject();
+                System.out.println(antwort);
+                finished = antwort.erraten;
+                ClientGuess x = new ClientGuess();
+                oos.writeObject(x);
+                oos.flush();
+            } while (!finished);
 
         }
-        catch(IOException e){
+        catch (IOException | ClassNotFoundException e){
             e.printStackTrace();
         }
-        finally {
-            scanner.close();
-        }
-
-
     }
-
-
 }

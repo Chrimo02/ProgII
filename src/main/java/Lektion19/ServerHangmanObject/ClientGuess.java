@@ -3,10 +3,10 @@ package Lektion19.ServerHangmanObject;
 import java.io.Serializable;
 import java.util.Scanner;
 
-public class Rateversuch implements Serializable {
-    char versuch;
-    public Rateversuch(){
+public class ClientGuess implements Serializable {
+    char guess;
+    public ClientGuess(){
         Scanner scanner = new Scanner(System.in);
-        this.versuch = scanner.nextLine().charAt(0);
+        this.guess = scanner.nextLine().charAt(0);
     }
 }

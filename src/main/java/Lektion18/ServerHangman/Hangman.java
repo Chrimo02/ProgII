@@ -5,7 +5,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 public class Hangman {
-    public Hangman(){}
+    public Hangman(){
+    }
 
     public  void playHangman(String loesung, OutputStream os, BufferedReader br) throws IOException
     {
