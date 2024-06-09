@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 public class SMSTest {
     TastenMap tasten = new TastenMap();
-    // TODO: Es sollten alle möglichen Eingaben getestet werden, nicht nur Stichproben
+    // Verbesserung: Es sollten alle möglichen Eingaben getestet werden, nicht nur Stichproben
     @Test
     public void testInvalidChar(){
         assertThrows(IllegalTelephoneNumberException.class, () -> tasten.get('+'));
